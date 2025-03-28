@@ -14,6 +14,7 @@ if (!cached) {
 }
 
 export async function connectToDb() {
+
   if (cached.conn) {
     return cached.conn;
   }
