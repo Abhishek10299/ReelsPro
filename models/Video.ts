@@ -10,7 +10,7 @@ export interface IVideo {
   title: string;
   description: string;
   videoUrl: string;
-  thumbanilUrl: string;
+  thumbnailUrl: string;
   controls?: boolean;
   transformation?: { hight: number; width: number; quality?: number };
   createdAt?: Date;
@@ -22,7 +22,7 @@ const videoSchema = new Schema<IVideo>(
     title: { type: String, required: true },
     description: { type: String, required: true },
     videoUrl: { type: String, required: true },
-    thumbanilUrl: { type: String, required: true },
+    thumbnailUrl: { type: String, required: true },
     controls: { type: String, default: true },
     transformation: {
       hight: { type: String, default: VIDEO_DIMENSIONS.hight },

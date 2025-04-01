@@ -2,24 +2,20 @@ import bcrypt from "bcryptjs";
 import mongoose, { model, models, Schema } from "mongoose";
 
 export interface IUser {
-  username: string;
   email: string;
   password: string;
-  publicKey: string;
-  privateKey: string;
-  friends: mongoose.Types.ObjectId[];
-  createdAt: Date;
+  _id?: mongoose.Types.ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-const userSchema = new Schema<IUser>({
-  username: { type: String, unique: true, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, unique: true },
-  publicKey: { type: String, required: true },
-  privateKey: { type: String, required: true },
-  friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  createdAt: { type: Date, default: Date.now },
-});
+const userSchema = new Schema<IUser>(
+  {
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, unique: true },
+  },
+  { timestamps: true }
+);
 
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
